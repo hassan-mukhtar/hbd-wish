@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fdf6ec;
+      text-align: center;
+      color: #5a3e36;
+      overflow-x: hidden;
+    }
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .active { display: flex; }
+    h1 { font-size: 2.2rem; margin-bottom: 10px; }
+    p { font-size: 1.1rem; color: #8c6d62; }
+    button {
+      background: #e07a5f;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    /* Balloon Screen */
+    .balloon-container {
+      display: flex;
+      gap: 15px;
+      margin: 30px 0;
+    }
+    .balloon {
+      width: 50px;
+      height: 65px;
+      background-color: #f2cc8f;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .balloon:nth-child(2) { background-color: #e07a5f; }
+    .balloon:nth-child(3) { background-color: #81b29a; }
+    /* Cake Screen */
+    .cake {
+      font-size: 80px;
+      margin: 20px 0;
+      cursor: pointer;
+    }
+    /* Photo Gallery */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      max-width: 400px;
+    }
+    .polaroid {
+      background: white;
+      padding: 10px 10px 25px 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      width: 100px;
+    }
+    .polaroid img { width: 100%; height: 100px; object-fit: cover; }
+    /* Letter Screen */
+    .letter-box {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-width: 320px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="s1" class="screen active">
+    <h1>Pop them all 🎈</h1>
+    <p>Balloons par tap karein!</p>
+    <div class="balloon-container">
+      <div class="balloon" onclick="popBalloon(this)"></div>
+      <div class="balloon" onclick="popBalloon(this)"></div>
+      <div class="balloon" onclick="popBalloon(this)"></div>
+    </div>
+    <button id="btn1" style="display:none;" onclick="nextScreen(2)">Aage Chalein ➡️</button>
+  </div>
+
+  <div id="s2" class="screen">
+    <h1>Happy Birthday! 🎂</h1>
+    <p>Cake par tap karke candle bujhayen!</p>
+    <div class="cake" onclick="nextScreen(3)">🎂</div>
+  </div>
+
+  <div id="s3" class="screen">
+    <h1>Our Best Moments 📸</h1>
+    <div class="gallery">
+      <div class="polaroid"><img src="https://picsum.photos/200?random=1" alt="Memory 1"></div>
+      <div class="polaroid"><img src="https://picsum.photos/200?random=2" alt="Memory 2"></div>
+      <div class="polaroid"><img src="https://picsum.photos/200?random=3" alt="Memory 3"></div>
+    </div>
+    <button onclick="nextScreen(4)">Message Dekhein ✉️</button>
+  </div>
+
+  <div id="s4" class="screen">
+    <div class="letter-box">
+      <h2 style="color:#e07a5f; margin-top:0;">Happy Birthday! ❤️</h2>
+      <p>Aapki zindagi me hamesha khushiyan rahein. Aap mere liye bohot khaas ho!</p>
+      <p style="text-align: right; font-weight: bold; margin-bottom: 0;">— From: Your Name</p>
+    </div>
+  </div>
+
+  <script>
+    let popped = 0;
+    function popBalloon(el) {
+      el.style.visibility = 'hidden';
+      popped++;
+      if(popped >= 3) {
+        document.getElementById('btn1').style.display = 'block';
+      }
+    }
+
+    function nextScreen(num) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('s' + num).classList.add('active');
+    }
+  </script>
+</body>
+</html>
